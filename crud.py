@@ -33,4 +33,11 @@ def create_trip(db: Session, trip: schemas.TripCreate, user_id: int):
 
 def get_trips_by_user(db: Session, user_id: int):
     return db.query(models.Trip).filter(models.Trip.owner_id == user_id).all()
-# ... (CRUD for Step à compléter)
+
+def delete_trip(db: Session, trip_id: int, user_id: int):
+    trip = db.query(models.Trip).filter(models.Trip.id == trip_id, models.Trip.owner_id == user_id).first()
+    if not trip:
+        return None
+    db.delete(trip)
+    db.commit()
+    return trip

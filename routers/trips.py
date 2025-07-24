@@ -49,3 +49,10 @@ def create_trip(trip: schemas.TripCreate, db: Session = Depends(get_db), current
 @router.get("/", response_model=list[schemas.Trip])
 def get_trips(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
     return crud.get_trips_by_user(db, user_id=current_user.id)
+
+@router.delete("/{trip_id}", response_model=schemas.Trip)
+def delete_trip(trip_id: int, db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
+    trip = crud.delete_trip(db=db, trip_id=trip_id, user_id=current_user.id)
+    if trip is None:
+        raise HTTPException(status_code=404, detail="Trip not found or not owned by user")
+    return trip

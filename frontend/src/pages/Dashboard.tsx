@@ -56,6 +56,18 @@ const Dashboard: React.FC = () => {
     setOpened(true);
   };
 
+  const deleteTrip = async (trip: Trip) => {
+    const token = localStorage.getItem('token');
+    try {
+      await api.delete(`/trips/${trip.id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      fetchTrips();
+    } catch {
+      // gestion d'erreur possible
+    }
+  };
+
   return (
     <Container size="sm" mt={40}>
       <Title order={2} mb="md">Mes voyages</Title>
@@ -90,6 +102,7 @@ const Dashboard: React.FC = () => {
                   <Text size="sm" color="dimmed">{trip.description}</Text>
                 </div>
                 <Button variant="light" onClick={() => openTripModal(trip)}>Voir</Button>
+                <Button variant="outline" onClick={() => deleteTrip(trip)}>Supprimer</Button>
               </Group>
             </Card>
           ))}
