@@ -122,7 +122,6 @@ const Dashboard: React.FC = () => {
                         opened={opened}
                         onClose={() => setOpened(false)}
                         fullScreen
-                        //title={selectedTrip?.title}
                     >
                         <Center><Title order={2} mb="md">{selectedTrip?.title}</Title></Center>
                         <Text size="lg" mb="md">{selectedTrip?.description}</Text>
