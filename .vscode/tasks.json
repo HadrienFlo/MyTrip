@@ -1,0 +1,12 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run FastAPI server",
+            "type": "shell",
+            "command": "C:/Users/Hadrien/Documents/Python/MyTrip/.venv/Scripts/python.exe -m uvicorn main:app --reload",
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}
